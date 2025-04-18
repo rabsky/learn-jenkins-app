@@ -20,5 +20,11 @@ pipeline {
                 '''
             }
         }
+
+        stage('Test Stage') {
+            steps {
+
+            }
+        }
     }
 }
