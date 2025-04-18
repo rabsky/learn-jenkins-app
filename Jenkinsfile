@@ -9,6 +9,7 @@ pipeline {
                     reuseNode true
                 }
             }
+            
             steps {
                 sh '''
                     ls -la
@@ -22,8 +23,18 @@ pipeline {
         }
 
         stage('Test Stage') {
-            steps {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
 
+            steps {
+                sh '''
+                    test -f ./build/index.html
+                    npm test
+                ''' 
             }
         }
     }
